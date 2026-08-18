@@ -2,16 +2,24 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
   "name": "com.sansfiction/catalog",
   "description": "Search the SansFiction book catalog and manage a personal reading library (books, collections, reading progress, ratings, stats). Public catalog is open; personal library requires a bearer token.",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "websiteUrl": "https://sansfiction.com",
   "repository": {
-    "url": "https://github.com/fgbytes/fgb-books",
+    "url": "https://github.com/fgbytes/sansfiction-mcp",
     "source": "github"
   },
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://sansfiction.com/api/mcp"
+      "url": "https://sansfiction.com/api/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer <token> (sf_mcp_...) for personal-library tools; omit for public catalog access. Generate a token at https://sansfiction.com/docs/agents",
+          "isRequired": false,
+          "isSecret": true
+        }
+      ]
     }
   ]
 }
