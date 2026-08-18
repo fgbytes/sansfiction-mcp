@@ -64,3 +64,33 @@ anonymous, 180 req/min authenticated.
 
 The SansFiction service is proprietary. This repository documents its public agent
 interface for discovery and integration.
+
+## Run locally as an MCP server (stdio)
+
+This repo also ships a small stdio MCP server that proxies to the hosted REST API,
+so you can run it anywhere an MCP client expects a local command:
+
+```bash
+npx sansfiction-mcp
+# or
+npm install && node index.js
+```
+
+Environment variables:
+
+- `SANSFICTION_TOKEN` — bearer token (`sf_mcp_…`) for the personal-library tools
+  (generate at https://sansfiction.com/docs/agents). Public catalog tools need none.
+- `SANSFICTION_BASE_URL` — override the API base (default `https://sansfiction.com`).
+
+Tools: `search_books`, `get_book`, `get_series`, `list_public_collections`,
+`list_my_books`, `add_book_to_library`, `update_library_book`,
+`remove_book_from_library`, `search_my_library`, `list_my_collections`,
+`get_reading_stats`.
+
+### Glama build configuration
+
+- **Build steps:** `["npm install"]`
+- **CMD arguments:** `["mcp-proxy","--","node","index.js"]`
+
+`tools/list` requires no network or credentials, so the introspection check passes
+without a token.

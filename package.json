@@ -1,0 +1,28 @@
+{
+  "name": "sansfiction-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for the SansFiction books catalog and personal reading library.",
+  "type": "module",
+  "bin": {
+    "sansfiction-mcp": "index.js"
+  },
+  "files": [
+    "index.js",
+    "SKILL.md",
+    "server.json"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "modelcontextprotocol",
+    "books",
+    "reading",
+    "sansfiction"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0"
+  }
+}
