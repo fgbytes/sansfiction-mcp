@@ -1,5 +1,7 @@
 # SansFiction MCP & Agent Skill
 
+[![sansfiction-mcp MCP server](https://glama.ai/mcp/servers/fgbytes/sansfiction-mcp/badges/score.svg)](https://glama.ai/mcp/servers/fgbytes/sansfiction-mcp)
+
 Connect AI agents to [**SansFiction**](https://sansfiction.com) — a digital library for
 books, collections, reading journals, and discovery.
 
