@@ -1,0 +1,385 @@
+{
+  "identifier": "fgbytes-sansfiction-mcp",
+  "name": "SansFiction",
+  "description": "Search the SansFiction books catalog (titles, authors, series, ISBNs, curated collections) and manage a personal reading library — status, reading progress, ratings, reviews, collections, and stats. Public catalog needs no auth; personal library uses a bearer token.",
+  "version": "1.1.0",
+  "homepage": "https://sansfiction.com",
+  "cloudEndpoint": "https://sansfiction.com/api/mcp",
+  "tags": [
+    "mcp",
+    "modelcontextprotocol",
+    "books",
+    "reading",
+    "sansfiction"
+  ],
+  "tools": [
+    {
+      "name": "search_books",
+      "description": "Search for books in the public catalog.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "includeSeries": {
+            "type": "boolean"
+          },
+          "searchType": {
+            "type": "string",
+            "enum": [
+              "all",
+              "author",
+              "series",
+              "mood",
+              "isbn",
+              "mod"
+            ]
+          },
+          "language": {
+            "type": "string"
+          },
+          "languages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "get_book_details",
+      "description": "Get detailed metadata for a specific book.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "bookId": {
+            "type": "string"
+          },
+          "edition_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "bookId"
+        ]
+      }
+    },
+    {
+      "name": "get_series_details",
+      "description": "Get information about a book series and its volumes.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "seriesId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "seriesId"
+        ]
+      }
+    },
+    {
+      "name": "list_my_books",
+      "description": "List books in your personal library. Requires authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "reading",
+              "want",
+              "read",
+              "dnf",
+              "all"
+            ],
+            "description": "Filter by status"
+          },
+          "limit": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    {
+      "name": "update_book_status",
+      "description": "Update a book's status in your library. Requires authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "book_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "reading",
+              "want",
+              "read",
+              "dnf"
+            ]
+          }
+        },
+        "required": [
+          "book_id"
+        ]
+      }
+    },
+    {
+      "name": "add_book_to_library",
+      "description": "Add a book to your library. Requires authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "book_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "reading",
+              "want",
+              "read",
+              "dnf"
+            ],
+            "default": "want"
+          },
+          "edition_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "book_id"
+        ]
+      }
+    },
+    {
+      "name": "remove_book_from_library",
+      "description": "Remove a book from your library. Requires authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "book_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "book_id"
+        ]
+      }
+    },
+    {
+      "name": "log_reading_progress",
+      "description": "Log reading progress and update reading stats. Requires authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "book_id": {
+            "type": "string"
+          },
+          "current_page": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "book_id",
+          "current_page"
+        ]
+      }
+    },
+    {
+      "name": "update_book_rating",
+      "description": "Update your rating for a book in your library. Requires authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "book_id": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "book_id",
+          "rating"
+        ]
+      }
+    },
+    {
+      "name": "update_book_review",
+      "description": "Update your review text for a book in your library. Requires authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "book_id": {
+            "type": "string"
+          },
+          "review": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "book_id",
+          "review"
+        ]
+      }
+    },
+    {
+      "name": "update_book_dates",
+      "description": "Update started/finished dates for a book in your library. Requires authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "book_id": {
+            "type": "string"
+          },
+          "started_at": {
+            "type": "string"
+          },
+          "finished_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "book_id"
+        ]
+      }
+    },
+    {
+      "name": "list_my_collections",
+      "description": "List your personal book collections. Requires authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "number",
+            "default": 20
+          },
+          "query": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "search_my_library",
+      "description": "Search for books specifically within your personal library. Requires authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "number",
+            "default": 10
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "reading",
+              "want",
+              "read",
+              "dnf",
+              "all"
+            ]
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "add_book_to_collection",
+      "description": "Add a book to one of your collections. Requires authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "book_id": {
+            "type": "string"
+          },
+          "collection_id": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "edition_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "book_id",
+          "collection_id"
+        ]
+      }
+    },
+    {
+      "name": "get_collection_details",
+      "description": "Get details for one of your collections and its books. Requires authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "collection_id": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "offset": {
+            "type": "number"
+          },
+          "rank": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "collection_id"
+        ]
+      }
+    },
+    {
+      "name": "get_stats_summary",
+      "description": "Get reading stats for a date range, matching the Stats page. Requires authorization.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "type": "string",
+            "enum": [
+              "weekly",
+              "monthly",
+              "yearly"
+            ]
+          },
+          "date": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "include_logs": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      }
+    }
+  ],
+  "resources": [],
+  "prompts": []
+}
