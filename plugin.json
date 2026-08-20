@@ -1,0 +1,11 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "sansfiction-mcp",
+  "version": "1.0.1",
+  "description": "Search the SansFiction books catalog and manage a personal reading library (books, collections, reading progress, ratings, stats) over MCP or REST. Public catalog needs no auth; personal library uses a bearer token.",
+  "author": { "name": "fgbytes", "url": "https://sansfiction.com" },
+  "homepage": "https://sansfiction.com",
+  "repository": "https://github.com/fgbytes/sansfiction-mcp",
+  "license": "MIT",
+  "keywords": ["mcp", "skill", "books", "reading", "catalog", "library", "sansfiction"]
+}
